@@ -6,16 +6,22 @@ gridListButtons.forEach(button => {
 
 function gridListToggle() {
     let originalButton = this;
-    
+
     originalButton.classList.add('animation');
     originalButton.classList.toggle('list');
 
-    // Clone the original button
-    let clonedButton = originalButton.cloneNode(true);
+    // Update the icon based on the current view
+    const icon = originalButton.querySelector('.icon');
+    if (originalButton.classList.contains('list')) {
+        // Update for list view
+        icon.innerHTML = '<div class="lines"><i></i><i></i><i></i><i></i></div>';
+    } else {
+        // Update for grid view
+        icon.innerHTML = '<div class="dots"><i></i><i></i><i></i><i></i></div>';
+    }
 
-    // Replace the original button with the cloned one
-    originalButton.parentNode.replaceChild(clonedButton, originalButton);
-
-    // Add a click event listener to the cloned button
-    clonedButton.addEventListener('click', gridListToggle);
+    // Remove animation class after animation completes
+    setTimeout(() => {
+        originalButton.classList.remove('animation');
+    }, 400);
 }

@@ -1,27 +1,24 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const gridListButton = document.querySelector('.grid-list-button');
+let gridListButtons = document.querySelectorAll('.grid-list-button');
 
-    gridListButton.addEventListener('click', function () {
-        gridListToggle(gridListButton);
-    });
+gridListButtons.forEach(button => {
+    button.addEventListener('click', gridListToggle);
 });
 
-function gridListToggle(button) {
-    button.classList.add('animation');
-    button.classList.toggle('list');
+function gridListToggle() {
+    let originalButton = this;
 
-    // Update the icon based on the current view
-    const icon = button.querySelector('.icon');
-    if (button.classList.contains('list')) {
-        // Update for list view
-        icon.innerHTML = '<span class="lines"><i></i><i></i><i></i><i></i></span>';
-    } else {
-        // Update for grid view
-        icon.innerHTML = '<span class="dots"><i></i><i></i><i></i><i></i></span>';
-    }
+    originalButton.classList.add('animation');
+    originalButton.classList.toggle('list');
 
-    // Remove animation class after animation completes
-    setTimeout(() => {
-        button.classList.remove('animation');
-    }, 400);
+    // Clone the original button
+    let clonedButton = originalButton.cloneNode(true);
+
+    // Replace the original button with the cloned one
+    originalButton.parentNode.replaceChild(clonedButton, originalButton);
+
+    // Update the gridListButtons NodeList
+    gridListButtons = document.querySelectorAll('.grid-list-button');
+
+    // Add a click event listener to the cloned button
+    clonedButton.addEventListener('click', gridListToggle);
 }

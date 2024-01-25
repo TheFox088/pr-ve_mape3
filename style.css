@@ -40,8 +40,9 @@ body {
 	animation-fill-mode: forwards;
 	animation-direction: reverse;
 }
-.grid-list-button.list .dots i {
-	animation-direction: normal;
+.grid-list-button.list .dots i,
+.grid-list-button.list .lines i {
+    animation-direction: normal;
 }
 .grid-list-button .dots i:nth-child(1) {
 	left: 0;
@@ -88,6 +89,30 @@ body {
 		transform: translate(-14px, 7px);
 	}
 }
+
+.grid-list-button .lines i:nth-child(1),
+.grid-list-button .lines i:nth-child(2),
+.grid-list-button .lines i:nth-child(3),
+.grid-list-button .lines i:nth-child(4) {
+    animation-name: lineScale;
+}
+
+.grid-list-button.animation .lines i:nth-child(1),
+.grid-list-button.animation .lines i:nth-child(2),
+.grid-list-button.animation .lines i:nth-child(3),
+.grid-list-button.animation .lines i:nth-child(4) {
+    animation-name: lineScale;
+}
+
+@keyframes lineScale {
+    0%, 20% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
 
 .grid-list-button .lines i {
 	position: absolute;
